@@ -1,0 +1,43 @@
+name: Node.js CI Test Suite
+
+on:
+  push:
+    branches: [ "main", "arena/**" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+env:
+  UBUNTU_ENVIRONMENT: "latest"
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
+jobs:
+  test-nodejs:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        os: [ ubuntu-latest ]
+        node-version: [ "latest" ]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }} on ${{ matrix.os }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify TypeScript compilation
+        run: npm run lint
+
+      - name: Run Node.js Backend, Kilo Rotator & Co-Owner Approval Tests
+        run: npm test
+
+      - name: Build application
+        run: npm run build

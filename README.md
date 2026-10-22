@@ -1,33 +1,33 @@
-# Fund-Verifier
+# VietBank Fund-Verifier
 
-**Fund-Verifier is a prototype for making jointly owned fund withdrawals more convenient through transparent, multi-party digital approval.**
+**Remote Multi-Owner Joint Bank Account & Real-Time Face-ID Head-Movement Liveness Verification Platform**
 
-#### Vision & originality
+Built with **Next.js**, **TypeScript**, **Node.js**, **Supabase**, **Vercel**, **Kilo Gateway 5-API-Key JWT Rotator ($0 Free AI Models)**, and **MCP Servers** (**Yunleng**, **Tide Raziel**, **Everything Claude Code**, and **Microsoft Playwright MCP**).
 
-Fund-Verifier proposes a digital workflow for co-owned bank funds. Instead of coordinating every co-owner's visit to a branch, a requester submits the transaction details and each required co-owner reviews the same request and records an independent decision. The distinctive idea is to digitize authorization—not remove it.
+---
 
-#### Trust constraint insight
+## Key Features
 
-Shared money is difficult to access remotely because banks must prevent unauthorized withdrawals and verify that the right people consented to the exact transaction. Fund-Verifier explores how explicit, transaction-specific approvals and a traceable decision history could reduce in-person coordination without weakening the account's authorization rules.
-
-#### Value & impact
-
-Co-owners, families, and small businesses could benefit from less scheduling friction and clearer records. For example, if three family members jointly own funds but live in different cities, they could review a withdrawal request remotely rather than coordinating a single branch visit—where the bank's policies and applicable rules permit digital authorization.
-
-#### Why TideCloak matters
-
-TideCloak is the intended trust layer for authenticating participants and supporting verifiable identity and access decisions. A production integration would pair it with server-side authorization and bank-controlled transaction checks. **This prototype does not yet make live TideCloak calls**; its approval workflow uses synthetic data and simulated decisions, so it does not claim to provide production-grade authentication.
-
-#### Prototype & storytelling
-
-The demo lets judges create a withdrawal request, inspect its amount and purpose, record two independent demo approvals, track the request status, cancel a pending request, and review or export the session activity log. Look for how the request moves through the approval workflow. No camera-based Face ID, live identity verification, bank connection, or money transfer is implemented.
-
-## Setup
-
-1. Open `index.html` in a modern browser.
-2. Use the fictional sample data to create a withdrawal request and try the approval, cancellation, activity-log, and CSV-export interactions.
-3. Treat all data and decisions as a demonstration only; do not use it for real financial or identity decisions.
-
-## Production considerations
-
-A real deployment would require authenticated co-owner accounts, server-side enforcement of the account mandate, transaction-bound approvals, replay protection, durable tamper-resistant audit records, privacy and biometric safeguards if facial verification is added, and integration approved by a regulated banking partner.
+1. **Supabase Authentication & User Directory (`users` table)**:
+   - Sign in (register) with **Email** (all email providers accepted), **Username**, and **Password** saved directly into the Supabase directory.
+   - If a user attempts to log in with an email address that is not registered in the Supabase database, the system prompts and requires the user to Sign In (register) first.
+2. **Top-Right Corner Notification Box (`notifications` table)**:
+   - Real-time notification center on the top-right corner of the main banking interface:
+     - **Co-Ownership Invitations**: Shows **`Decline`** and **`Accept`** buttons when invited to co-own a fund.
+     - **Co-Owner Deduction Verification Requests**: Shows **`Decline`** and **`Verify`** buttons when another co-owner requests to deduct funds.
+3. **Yunleng MCP Real-Time Face Recognition & Anti-AI Spoofing Head Movement Verification**:
+   - Clicking **`Verify`** opens the live camera verification modal (`navigator.mediaDevices.getUserMedia`), powered by **Yunleng MCP** (`https://github.com/ChenLaoshiYF/yunleng`) and **Kilo Gateway Free Vision Models**.
+   - Requires the co-owner to enable camera permission and swipe/move their head in all 4 directions in real time (**Left**, **Right**, **Up**, **Down**) to prevent AI-spoofed faces.
+4. **Co-Owned Funds in VND (`funds` & `fund_members` tables)**:
+   - Create a fund with an initial balance in **VND** and invite co-owners by username or email (verified against the Supabase `users` directory).
+   - **Add Fund**: Input any amount in VND (`> 0`) and click **Submit** to add money immediately.
+   - **Deduct Fund**: Input any amount in VND (`> 0` and `< current fund balance`) and click **Submit** to send verification requests to all remaining co-owners.
+   - **3 Co-Owner Approval Status Labels**: Track every co-owner's verification decision via **`Approved`**, **`Waiting for approval`**, or **`Rejected`** with strict server-side multi-approval enforcement and expiration rules.
+5. **Kilo Gateway 5-API-Key JWT Rotator & 1-Minute Free Model Catalog Sync (`src/lib/kilo-gateway.ts`)**:
+   - Rotates automatically across `KILO_GATEWAY_API_1`, `KILO_GATEWAY_API_2`, `KILO_GATEWAY_API_3`, `KILO_GATEWAY_API_4`, and `KILO_GATEWAY_API_5` on rate-limit, invalid key, or failure, and restores keys when their rate-limit resets.
+   - Defaults to `openrouter/free` (`openrouter-free`) and `kilo-auto/free` (`auto/free`), enforces `$0 / Mtok` input and output pricing, switches immediately if a model is rate-limited, and syncs the free model list every **1 minute**.
+6. **CI/CD & Code Security Workflows**:
+   - `nextjs.yaml` (`.github/workflows/nextjs.yaml`)
+   - `nodejs.yaml` (`.github/workflows/nodejs.yaml`)
+   - `codeql.yaml` (`.github/workflows/codeql.yaml`)
+   - `vercel.json` for Vercel deployment.

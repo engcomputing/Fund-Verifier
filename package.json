@@ -1,0 +1,35 @@
+{
+  "name": "fund-verifier",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Vietnam Bank Multi-Owner Co-Vault & Face-ID Liveness Fund Verification Platform powered by Supabase, Kilo Gateway Rotator, and Yunleng / Tide Raziel / Everything Claude Code / Playwright MCP",
+  "scripts": {
+    "dev": "next dev --hostname 0.0.0.0 --port 3000",
+    "build": "next build",
+    "start": "next start --hostname 0.0.0.0 --port 3000",
+    "lint": "tsc --noEmit",
+    "test": "vitest run",
+    "test:unit": "vitest run",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.5.2",
+    "@supabase/supabase-js": "^2.49.1",
+    "lucide-react": "^0.475.0",
+    "next": "^16.4.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@playwright/mcp": "^0.0.20",
+    "@playwright/test": "^1.51.0",
+    "@tailwindcss/postcss": "^4.0.9",
+    "@types/node": "^22.13.5",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.0.9",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.7"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "mcpServers": {
+    "yunleng": {
+      "command": "python3",
+      "args": ["-m", "camera_mcp.server"],
+      "cwd": "./mcp-servers/yunleng",
+      "description": "Yunleng Camera Vision MCP Server (https://github.com/ChenLaoshiYF/yunleng) — face recognition, head movement liveness, multi-camera capture, gesture recognition, and scene understanding",
+      "env": {
+        "CAMERA_MCP_OLLAMA_MODEL": "qwen2.5vl",
+        "CAMERA_MCP_OLLAMA_URL": "http://localhost:11434"
+      }
+    },
+    "tide-pack": {
+      "command": "npx",
+      "args": ["-y", "@tideorg/mcp"],
+      "url": "https://mcp.tide.org/mcp",
+      "description": "Tide Raziel MCP Server (https://docs.tide.org/ai-agent-pack) — threshold cryptography, JWT/DPoP verification, IGA multi-owner governance, and security gap analysis"
+    },
+    "everything-claude-code": {
+      "command": "node",
+      "args": ["./mcp-servers/everything-claude-code/agent-team-server.mjs"],
+      "description": "Everything Claude Code (https://github.com/WorldFlowAI/everything-claude-code) — multi-agent team orchestration (planner, architect, security-reviewer, tdd-guide, e2e-runner)"
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest", "--headless"],
+      "description": "Microsoft Playwright MCP Server (https://github.com/microsoft/playwright-mcp) — browser automation and end-to-end verification"
+    },
+    "vercel": {
+      "url": "https://mcp.vercel.com",
+      "description": "Official Vercel MCP Server (https://vercel.com/get-started.md) — deployment and project operations"
+    }
+  }
+}
